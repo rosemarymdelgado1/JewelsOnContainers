@@ -16,13 +16,23 @@ namespace WebMVC.Controllers
         {
             _service = service;
         }
-        public async Task<IActionResult> Index(int page)
+        public async Task<IActionResult> Index(int? page)
         {
             var itemsOnPage = 10;
 
-            var catalog = await _service.GetCatalogItemsAsync(page, itemsOnPage);
-
-            return View(catalog);
+            var catalog = await _service.GetCatalogItemsAsync(page ?? 0, itemsOnPage);
+            var vm = new CatalogIndexViewModel
+            {
+                CatalogItems = catalog.Data,
+                PaginationInfo = new PaginationInfo
+                {
+                    ActualPage = page ?? 0,
+                    ItemsPerPage = itemsOnPage,
+                    TotalItems = catalog.Count,
+                    TotalPages = (int)Math.Ceiling((decimal)catalog.Count / itemsOnPage)
+                }
+            };
+            return View(vm);
         }
     }
 }
