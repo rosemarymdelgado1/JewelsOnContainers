@@ -9,17 +9,24 @@ namespace WebMVC.Infrastructure
     {
         public static class Catalog
         {
+            /*public static string GetAllCatalogItems(string baseUri,
+                int page, int take, int? brand, int? type)*/
             public static string GetAllCatalogItems(string baseUri,
-                int page, int take, int? brand, int? type)
+                int page, int take, int brand, int type)
             {
                 var filterQs = string.Empty;
-                if (brand.HasValue || type.HasValue)
+                if (brand != 0 || type != 0)
+                /*if (brand.HasValue || type.HasValue)*/
                 {
-                    var brandQs = (brand.HasValue) ? brand.Value.ToString() : "null";
+                    var brandQs = (brand != 0) ? "catalogTypeId=" + brand : "";
+                    var typeQs = (type != 0) ? "catalogBrandId=" + type : "";
+                    filterQs = $"{typeQs}&{brandQs}";
+                    /*var brandQs = (brand.HasValue) ? brand.Value.ToString() : "null";
                     var typeQs = (brand.HasValue) ? type.Value.ToString() : "null";
-                    filterQs = $"/type/{typeQs}/brand/{brandQs}";
+                    filterQs = $"/type/{typeQs}/brand/{brandQs}";*/
                 }
-                return $"{baseUri}items{filterQs}?pageIndex={page}&pageSize={take}";
+                return $"{baseUri}items?{filterQs}&pageIndex={page}&pageSize={take}";
+                /*return $"{baseUri}items{filterQs}?pageIndex={page}&pageSize={take}";*/
             }
 
             public static string GetAllTypes(string baseUri)

@@ -27,10 +27,19 @@ namespace WebMVC.Infrastructure
             return await response.Content.ReadAsStringAsync();
         }
 
-        public Task<HttpResponseMessage> PostAsync<T>(string uri, T item, string authorizationToken = null, string authorizationMethod = "Bearer")
+
+
+        public Task<HttpResponseMessage> PostAsync<T>(string uri, T item,
+            string authorizationToken = null, string authorizationMethod = "Bearer")
+        {
+
+            throw new NotImplementedException();
+
+        }
+        /*public Task<HttpResponseMessage> PostAsync<T>(string uri, T item, string authorizationToken = null, string authorizationMethod = "Bearer")
         {
             throw new NotImplementedException();
-        }
+        }*/
 
         public Task<HttpResponseMessage> PutAsync<T>(string uri, T item, string authorizationToken = null, string authorizationMethod = "Bearer")
         {
