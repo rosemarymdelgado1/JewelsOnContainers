@@ -10,29 +10,11 @@ namespace WebMVC.Infrastructure
         public static class Catalog
         {
             public static string GetAllCatalogItems(string baseUri,
-                int page, int take, int? brand, int? type)
+                int page, int take)
             {
-                var filterQs = string.Empty;
-                if (brand.HasValue || type.HasValue)
-                {
-                    var brandQs = (brand.HasValue) ? brand.Value.ToString() : "null";
-                    var typeQs = (type.HasValue) ? type.Value.ToString() : "null";
-                    filterQs = $"/type/{typeQs}/brand/{brandQs}";
-                }
-                return $"{baseUri}items{filterQs}?pageIndex={page}&pageSize={take}";
-            }
-
-            public static string GetAllTypes(string baseUri)
-            {
-                return $"{baseUri}catalogtypes";
-            }
-
-            public static string GetAllBrands(string baseUri)
-            {
-                return $"{baseUri}catalogbrands";
+                return $"{baseUri}items?pageIndex={page}&pageSize={take}";
             }
         }
-
         public static class Basket
         {
 
