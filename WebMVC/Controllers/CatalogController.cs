@@ -43,5 +43,15 @@ namespace WebMVC.Controllers
             };
             return View(vm);
         }
+
+        [Authorize]
+        public IActionResult About()
+        {
+            ViewData["Message"] = "Your application description page.";
+
+
+            return View();
+        }
+
     }
 }
