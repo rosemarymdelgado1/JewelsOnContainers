@@ -35,6 +35,17 @@ namespace ProductCatalogApi
             services.AddDbContext<CatalogContext>(options =>
                 options.UseSqlServer(connectionString));
 
+            services.AddSwaggerGen(options =>
+            {
+                //options.DescribeAllEnumsAsStrings();
+                options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+                {
+                    Title = "JewelonContainers - Product Catalog API",
+                    Version = "v1",
+                    Description = "Product catalog microservice",
+                });
+            });
+
             /*options.UseSqlServer(Configuration["ConnectionString"]));*/
         }
 
@@ -47,8 +58,12 @@ namespace ProductCatalogApi
             }
 
             app.UseRouting();
-
             app.UseAuthorization();
+            app.UseSwagger()
+                .UseSwaggerUI(e =>
+                {
+                    e.SwaggerEndpoint($"/swagger/v1/swagger.json", "ProductCatalogApi v1");
+                });
 
             app.UseEndpoints(endpoints =>
             {
