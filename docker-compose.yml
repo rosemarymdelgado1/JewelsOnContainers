@@ -67,7 +67,7 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       CatalogUrl: http://catalog
-      IdentityUrl: http://192.168.11.177:6900
+      IdentityUrl: http://192.168.238.49:6900
       CallBackUrl: http://localhost:5210
     ports:
       - "5210:80"

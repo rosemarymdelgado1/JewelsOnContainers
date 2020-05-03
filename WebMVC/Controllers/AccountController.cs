@@ -1,21 +1,20 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
-using WebMVC.Controllers;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
-namespace WebMvc.Controllers
+namespace WebMVC.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {
-
-
         [Authorize]
         public async Task<IActionResult> SignIn(string returnUrl)
         {
@@ -43,19 +42,6 @@ namespace WebMvc.Controllers
             return RedirectToAction(nameof(CatalogController.About), "Catalog");
         }
 
-        //public async Task<IActionResult> Signout()
-        //{
-        //    await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-        //    await HttpContext.SignOutAsync(OpenIdConnectDefaults.AuthenticationScheme);
-
-        //    ////// "Catalog" because UrlHelper doesn't support nameof() for controllers
-        //    ////// https://github.com/aspnet/Mvc/issues/5853
-        //    var homeUrl = Url.Action(nameof(CatalogController.Index), "Catalog");
-        //    return new SignOutResult(OpenIdConnectDefaults.AuthenticationScheme,
-        //        new AuthenticationProperties { RedirectUri = homeUrl });
-        //}
-
-
         public async Task<IActionResult> Signout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
@@ -67,8 +53,5 @@ namespace WebMvc.Controllers
             return new SignOutResult(OpenIdConnectDefaults.AuthenticationScheme,
                 new AuthenticationProperties { RedirectUri = homeUrl });
         }
-
     }
 }
-
- 
