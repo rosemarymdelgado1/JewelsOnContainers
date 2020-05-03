@@ -44,6 +44,7 @@ namespace ProductCatalogApi
                     Version = "v1",
                     Description = "Product catalog microservice",
                 });
+                options.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
             });
 
             /*options.UseSqlServer(Configuration["ConnectionString"]));*/

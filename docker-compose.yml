@@ -51,7 +51,7 @@ services:
       MvcClient: http://localhost:5210
     ports:
       - "6900:80"
-    container_name: tokenserviceapi
+    container_name: tokenserviceapi1
     networks:
       - backend
       - frontend
@@ -67,7 +67,7 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       CatalogUrl: http://catalog
-      IdentityUrl: http://10.0.0.144:6900
+      IdentityUrl: http://192.168.11.177:6900
       CallBackUrl: http://localhost:5210
     ports:
       - "5210:80"
@@ -75,4 +75,5 @@ services:
       - frontend
     depends_on:
       - catalog
+      - tokenserver
 
